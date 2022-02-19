@@ -6,5 +6,5 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://10.0.224.14:3306/welkin?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
-    username: welkin
-    password: welkin
+    username: root
+    password: _welkin4096
