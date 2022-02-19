@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.windvalley</groupId>
     <artifactId>music</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>music</name>
     <description>music</description>
     <properties>

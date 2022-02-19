@@ -1,5 +1,5 @@
 spring:
   profiles:
-    active: dev   #使用dev的环境配置
+    active: prod
   application:
     name: music
