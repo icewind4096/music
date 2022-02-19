@@ -1,0 +1,11 @@
+server:
+  port: 8150
+  tomcat:
+    max-threads: 10   #tomcat最大并发修改为10，默认值为200
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/welkin?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+
