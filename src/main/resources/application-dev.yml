@@ -1,5 +1,5 @@
 server:
-  port: 8150
+  port: 8160
   tomcat:
     max-threads: 10   #tomcat最大并发修改为10，默认值为200
 spring:
