@@ -1,4 +1,4 @@
-package com.windvalley.music.controller;
+package com.windvalley.music.controller.test;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
