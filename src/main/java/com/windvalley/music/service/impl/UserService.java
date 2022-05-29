@@ -21,7 +21,7 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IUserS
     UserConvert userConvert;
 
     @Override
-    public List<UserDTO> userList() {
+    public List<UserDTO> useList() {
         return userMapper.selectList(null).stream().map(userConvert::toDTO).collect(Collectors.toList());
     }
 }

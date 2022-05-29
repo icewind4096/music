@@ -30,5 +30,5 @@ public class UserDTO {
 
     private Date lastLoginTime;
 
-    private List<RoleDTO> roles;
+//    private List<RoleDTO> roles;
 }

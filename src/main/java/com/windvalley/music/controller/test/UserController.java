@@ -26,6 +26,6 @@ public class UserController {
     @ApiOperation("用户列表")
     @GetMapping("list")
     public List<UserVO> list(){
-        return userService.userList().stream().map(userConvert::toVO).collect(Collectors.toList());
+        return userService.useList().stream().map(userConvert::toVO).collect(Collectors.toList());
     }
 }

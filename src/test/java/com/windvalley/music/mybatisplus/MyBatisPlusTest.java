@@ -1,34 +1,42 @@
 package com.windvalley.music.mybatisplus;
 
+import com.windvalley.music.common.base.enums.Gender;
+import com.windvalley.music.entity.User;
+import com.windvalley.music.mapper.UserMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 public class MyBatisPlusTest {
-//    @Autowired
-//    private UserMapper userMapper;
-//
-//    @Test
-//    public void testSelectList(){
-//        List<User> userList = userMapper.selectList(null);
-//        for (User user: userList){
-//            System.out.println(user.toString());
-//        }
-//    }
-//
-//    @Test
-//    public void testInsert(){
-//        User user = new User();
-//        user.setUserName("张三");
-//        user.setNickName("张三NickName");
-//        user.setPassword("password");
-//        user.setEnabled(true);
-//        user.setLocked(true);
-//        user.setGender(Gender.FEMALE);
-//        user.setLastLoginIp("192.168.0.1");
-//        user.setLastLoginTime(new Date());
-//        System.out.println(userMapper.insert(user));
-//    }
-//
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    public void testSelectList(){
+        List<User> userList = userMapper.selectList(null);
+        for (User user: userList){
+            System.out.println(user.toString());
+        }
+    }
+
+    @Test
+    public void testInsert(){
+        User user = new User();
+        user.setUserName("张三");
+        user.setNickName("张三NickName");
+        user.setPassword("password");
+        user.setEnabled(true);
+        user.setLocked(true);
+        user.setGender(Gender.FEMALE);
+        user.setLastLoginIp("192.168.0.1");
+        user.setLastLoginTime(new Date());
+        System.out.println(userMapper.insert(user));
+    }
+
 //    @Test
 //    public void deleById(){
 //        int result = userMapper.deleteById(12L);
