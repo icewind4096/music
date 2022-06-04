@@ -20,6 +20,9 @@ public enum ResultCodeEnum {
     JSON_PARSE_ERROR(false, 31002, "json解析异常"),
     PARAM_ERROR(false, 31003, "参数不正确"),
 
+    REGISTER_USER_ALREADY_EXISTS_ERROR(false, 28003, "用户已被注册"),
+    USER_NOT_EXISTS_ERROR(false, 28004, "用户不存在"),
+
 //    FILE_UPLOAD_ERROR(false, 21004, "文件上传错误"),
 //    FILE_DELETE_ERROR(false, 21005, "文件刪除错误"),
 //    EXCEL_DATA_IMPORT_ERROR(false, 21006, "Excel数据导入错误"),
@@ -58,7 +61,6 @@ public enum ResultCodeEnum {
 //    LOGIN_ACL(false, 28005, "没有权限"),
 //    SMS_SEND_ERROR(false, 28006, "短信发送失败"),
 //    SMS_SEND_ERROR_BUSINESS_LIMIT_CONTROL(false, 28007, "短信发送过于频繁")
-    REGISTER_USER_ALREADY_EXISTS_ERROR(false, 28003, "用户已被注册"),
     ;
 
 

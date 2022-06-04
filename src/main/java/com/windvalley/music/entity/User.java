@@ -13,9 +13,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)

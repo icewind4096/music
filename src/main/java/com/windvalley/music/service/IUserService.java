@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.windvalley.music.dto.UserCreateDTO;
 import com.windvalley.music.dto.UserDTO;
 import com.windvalley.music.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 

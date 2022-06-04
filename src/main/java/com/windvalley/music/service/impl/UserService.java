@@ -11,7 +11,6 @@ import com.windvalley.music.dto.UserDTO;
 import com.windvalley.music.entity.User;
 import com.windvalley.music.mapper.UserMapper;
 import com.windvalley.music.service.IUserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +25,17 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IUserS
 
     @Autowired
     UserConvert userConvert;
+
+//    @Override
+//    public User loadUserByUsername(String userName) {
+//        User user = findUserByName(userName);
+//
+//        if (user == null){
+//            throw new WindvalleyException(ResultCodeEnum.USER_NOT_EXISTS_ERROR);
+//        }
+//
+//        return user;
+//    }
 
     @Override
     public List<UserDTO> listAll() {

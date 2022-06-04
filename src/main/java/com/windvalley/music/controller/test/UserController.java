@@ -29,7 +29,7 @@ public class UserController {
     UserConvert userConvert;
 
     @ApiOperation("用户列表")
-    @GetMapping("list")
+    @PostMapping("list")
     public R list(){
         List<UserVO> userVOS = userService.listAll().stream().map(userConvert::toVO).collect(Collectors.toList());
         return R.ok().data("items", userVOS);
