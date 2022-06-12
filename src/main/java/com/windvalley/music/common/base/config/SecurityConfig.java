@@ -20,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String SECRET = "windvalley"; //生成JWT的秘钥
     public static final long EXPIRATION_TIME = 3600 * 24;//JWT令牌过期时间
-    public static final String TOKEN_PREFIX = "icewind ";
+    public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";//JWT鉴权后放到header里面的变量名称
     public static final String SIGN_UP_URL = "/api/users";
 

@@ -2,11 +2,7 @@ package com.windvalley.music.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.windvalley.music.common.base.config.SecurityConfig;
-import com.windvalley.music.common.base.exception.WindvalleyException;
-import com.windvalley.music.common.base.result.ResultCodeEnum;
-import com.windvalley.music.entity.User;
 import com.windvalley.music.security.JWTUserDetail;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
