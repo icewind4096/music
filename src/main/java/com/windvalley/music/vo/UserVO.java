@@ -10,25 +10,9 @@ import java.util.List;
 public class UserVO {
     private String id;
 
-    private Date createTime;
-
-    private Date updateTime;
-
     private String userName;
 
     private String nickName;
 
-    private String password;
-
-    private Gender gender;
-
-    private Boolean locked;
-
-    private Boolean enabled;
-
-    private String lastLoginIp;
-
-    private Date lastLoginTime;
-
-    private List<RoleVO> roles;
+//    private List<RoleVO> roles;
 }

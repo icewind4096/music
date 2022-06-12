@@ -21,6 +21,7 @@ public enum ResultCodeEnum {
     PARAM_ERROR(false, 31003, "参数不正确"),
 
     REGISTER_USER_ALREADY_EXISTS_ERROR(false, 28003, "用户已被注册"),
+    REGISTER_USER_DATA_NOT_VALID_ERROR(false, 28003, "用户注册数据格式不合法"),
     USER_NOT_EXISTS_ERROR(false, 28004, "用户不存在"),
 
 //    FILE_UPLOAD_ERROR(false, 21004, "文件上传错误"),

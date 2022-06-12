@@ -10,10 +10,6 @@ import java.util.List;
 public class UserDTO {
     private String id;
 
-    private Date createTime;
-
-    private Date updateTime;
-
     private String userName;
 
     private String nickName;
@@ -30,5 +26,5 @@ public class UserDTO {
 
     private Date lastLoginTime;
 
-//    private List<RoleDTO> roles;
+    private List<RoleDTO> roles;
 }

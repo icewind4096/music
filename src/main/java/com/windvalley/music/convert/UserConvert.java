@@ -1,7 +1,8 @@
 package com.windvalley.music.convert;
 
-import com.windvalley.music.dto.UserCreateDTO;
+import com.windvalley.music.dto.UserCreateRequest;
 import com.windvalley.music.dto.UserDTO;
+import com.windvalley.music.dto.UserUpdateRequest;
 import com.windvalley.music.entity.User;
 import com.windvalley.music.vo.UserVO;
 import org.mapstruct.Mapper;
@@ -12,5 +13,7 @@ public interface UserConvert {
 
     UserVO toVO(UserDTO userDTO);
 
-    User toEntriy(UserCreateDTO userCreateDTO);
+    User toEntriy(UserCreateRequest userCreateRequest);
+
+    User toEntriy(UserUpdateRequest userUpdateRequest);
 }

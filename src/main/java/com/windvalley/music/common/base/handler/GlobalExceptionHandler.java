@@ -7,6 +7,7 @@ import com.windvalley.music.common.base.util.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,5 +44,12 @@ public class GlobalExceptionHandler {
     public R error(WindvalleyException e){
         log.error(ExceptionUtils.getMessage(e));
         return R.error().message(e.getMessage()).code(e.getCode());
+    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ResponseBody
+    public R error(MethodArgumentNotValidException e){
+        log.error(ExceptionUtils.getMessage(e));
+        return R.error().message(e.getBindingResult().getFieldError().getDefaultMessage()).code(ResultCodeEnum.REGISTER_USER_DATA_NOT_VALID_ERROR.getCode());
     }
 }
