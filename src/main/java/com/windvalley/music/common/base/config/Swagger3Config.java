@@ -13,6 +13,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Configuration
 @EnableOpenApi
@@ -54,12 +55,13 @@ public class Swagger3Config {
                 .securitySchemes(Collections.singletonList(apiKey()))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.windvalley.music.controller.back")) // 设置扫描路径
-                .paths(PathSelectors.regex("/admin/.*"))//只要admin路径下的接口
+//                .paths(PathSelectors.regex("/admin/.*")) //只要admin路径下的接口
+                .paths(PathSelectors.any())//暂时打开全部路径
                 .build();
     }
 
     private ApiKey apiKey() {
-        return new ApiKey("JWT", "Authorization", "header");
+        return new ApiKey("Authorization", "Authorization", "header");
     }
 
     private SecurityContext securityContext() {
@@ -70,7 +72,7 @@ public class Swagger3Config {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
-        return Collections.singletonList(new SecurityReference("JWT", authorizationScopes));
+        return Collections.singletonList(new SecurityReference("Authorization", authorizationScopes));
     }
 
     private ApiInfo adminAPIInfo() {

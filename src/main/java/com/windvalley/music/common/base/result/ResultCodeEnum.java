@@ -23,6 +23,9 @@ public enum ResultCodeEnum {
     REGISTER_USER_ALREADY_EXISTS_ERROR(false, 28003, "用户已被注册"),
     REGISTER_USER_DATA_NOT_VALID_ERROR(false, 28003, "用户注册数据格式不合法"),
     USER_NOT_EXISTS_ERROR(false, 28004, "用户不存在"),
+    USER_PASSWORD_NOT_RIGHT_ERROR(false, 28005, "用户不存在或者密码不正确"),
+    USER_NOT_EANBLED_ERROR(false, 28006, "用户未启用"),
+    USER_NOT_LOCKED_ERROR(false, 28007, "用户被锁定"),
 
 //    FILE_UPLOAD_ERROR(false, 21004, "文件上传错误"),
 //    FILE_DELETE_ERROR(false, 21005, "文件刪除错误"),

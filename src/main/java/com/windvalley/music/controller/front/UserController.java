@@ -88,4 +88,12 @@ public class UserController {
         }
         return R.error().message("删除用户数据失败");
     }
+
+    @ApiOperation("当前用户信息")
+    @PostMapping("/me")
+    public R currentUser(){
+        UserVO userVO = userConvert.toVO(userService.getCurrentUser());
+
+        return R.ok().data("item", userVO);
+    }
 }

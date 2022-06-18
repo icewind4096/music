@@ -21,4 +21,8 @@ public interface IUserService extends IService<User> {
     UserDTO getInfoById(String id);
 
     Boolean updateInfoById(String id, UserUpdateRequest userUpdateRequest);
+
+    String createToken(String userName, String password);
+
+    UserDTO getCurrentUser();
 }

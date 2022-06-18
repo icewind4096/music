@@ -1,9 +1,12 @@
 package com.windvalley.music.service.impl;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.windvalley.music.common.base.config.SecurityConfig;
 import com.windvalley.music.common.base.enums.Gender;
 import com.windvalley.music.common.base.exception.WindvalleyException;
 import com.windvalley.music.common.base.result.ResultCodeEnum;
@@ -14,12 +17,16 @@ import com.windvalley.music.dto.UserDTO;
 import com.windvalley.music.dto.UserUpdateRequest;
 import com.windvalley.music.entity.User;
 import com.windvalley.music.mapper.UserMapper;
+import com.windvalley.music.security.JWTUserDetail;
 import com.windvalley.music.service.IUserService;
 import com.windvalley.music.vo.UserQueryVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,5 +117,36 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IUserS
         queryWrapper.eq("username", userName);
 
         return baseMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public String createToken(String userName, String password) {
+        User user = getInfoByName(userName);
+
+        if ((user == null) || (user != null && !MD5.encrypt(password).equals(user.getPassword())) ){
+            throw new WindvalleyException(ResultCodeEnum.USER_PASSWORD_NOT_RIGHT_ERROR);
+        }
+
+        if (!user.getEnabled()){
+            throw new WindvalleyException(ResultCodeEnum.USER_NOT_EANBLED_ERROR);
+        }
+
+        if (user.getLocked()){
+            throw new WindvalleyException(ResultCodeEnum.USER_NOT_LOCKED_ERROR);
+        }
+
+        return JWT.create()
+                .withSubject(userName)
+                .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConfig.EXPIRATION_TIME))
+                .sign(Algorithm.HMAC512(SecurityConfig.SECRET));
+    }
+
+    @Override
+    public UserDTO getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = getInfoByName(authentication.getName());
+
+        return userConvert.toDTO(user);
     }
 }

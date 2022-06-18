@@ -20,10 +20,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String SECRET = "windvalley"; //生成JWT的秘钥
-    public static final long EXPIRATION_TIME = 3600 * 24;//JWT令牌过期时间
+    public static final long EXPIRATION_TIME = 3600 * 1000 * 24;//JWT令牌过期时间
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";//JWT鉴权后放到header里面的变量名称
-    public static final String SIGN_UP_URL = "/api/users";
+    public static final String CREATE_TOKEN_URL = "/tokens";
 
     @Autowired
     JWTUserDetailService jwtUserDetailService;
@@ -41,9 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
             .authorizeRequests()
+            .antMatchers(CREATE_TOKEN_URL).permitAll()
             .anyRequest().authenticated()
             .and()
-            .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+//使用了外部获取token的逻辑，移除这个认证过滤器
+//            .addFilter(new JWTAuthenticationFilter(authenticationManager()))
             .addFilter(new JWTAuthorizationFilter(authenticationManager()))
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

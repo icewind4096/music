@@ -3,7 +3,6 @@ package com.windvalley.music.vo;
 import com.windvalley.music.common.base.enums.Gender;
 import lombok.Data;
 
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -14,5 +13,11 @@ public class UserVO {
 
     private String nickName;
 
-//    private List<RoleVO> roles;
+    private Gender Gender;
+
+    private Boolean locked;
+
+    private Boolean enabled;
+
+    private List<RoleVO> roles;
 }
