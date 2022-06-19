@@ -3,8 +3,13 @@ package com.windvalley.music.filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.windvalley.music.common.base.config.SecurityConfig;
+import com.windvalley.music.entity.Role;
+import com.windvalley.music.service.IRoleService;
+import com.windvalley.music.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -14,10 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
+    private IRoleService roleService;
+
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, IRoleService roleService) {
         super(authenticationManager);
+        this.roleService = roleService;
     }
 
     @Override
@@ -43,9 +52,18 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                 .getSubject();
 
         if (userName != null){
-            return new UsernamePasswordAuthenticationToken(userName, null, new ArrayList<>());
+            List<Role> roles = roleService.getRolesByUserName(userName);
+
+            List<SimpleGrantedAuthority> collect = new ArrayList<SimpleGrantedAuthority>();
+            for (Role role : roles){
+                collect.add(new SimpleGrantedAuthority(role.getName()));
+            }
+
+            return new UsernamePasswordAuthenticationToken(userName, null, collect);
         }
 
         return null;
     }
 }
+
+

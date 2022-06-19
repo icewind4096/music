@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class UserController {
 
     @ApiOperation("用户列表")
     @PostMapping("list")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R list(){
         List<UserVO> userVOS = userService.listAll().stream().map(userConvert::toVO).collect(Collectors.toList());
         return R.ok().data("items", userVOS);
@@ -43,6 +45,7 @@ public class UserController {
 
     @ApiOperation("用户分页列表")
     @PostMapping("list/{current}/{size}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R search(@ApiParam(value = "当前页码", required = true) @PathVariable Long current
             , @ApiParam(value = "每页记录数", required = true) @PathVariable Long size
             , @ApiParam("查询条件对象") UserQueryVO userQueryVO) {
@@ -59,6 +62,7 @@ public class UserController {
 
     @ApiOperation("根据用户ID获得用户信息")
     @PostMapping("{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R infoById(@ApiParam(value="用户ID", required = true) @PathVariable(value = "id", required = true) String id){
         UserDTO userDTO = userService.getInfoById(id);
         return R.ok().data("item", userDTO);
@@ -73,6 +77,7 @@ public class UserController {
 
     @ApiOperation("用户修改")
     @PostMapping("{id}/update")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R updateInfoById(@ApiParam(value = "修改用户信息", required = true) @PathVariable(value="id", required = true) String id, @RequestBody UserUpdateRequest userUpdateRequest){
         if (userService.updateInfoById(id, userUpdateRequest)){
             return R.ok().message("修改用户数据成功");
@@ -82,6 +87,7 @@ public class UserController {
 
     @ApiOperation("用户删除")
     @PostMapping("{id}/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public R deleteInfoById(@ApiParam(value = "删除用户信息", required = true) @PathVariable(value="id", required = true) String id){
         if (userService.removeById(id)){
             return R.ok().message("删除用户数据成功");

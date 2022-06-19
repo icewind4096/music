@@ -4,7 +4,6 @@ import com.windvalley.music.common.base.enums.Gender;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 public class UserDTO {
@@ -26,5 +25,5 @@ public class UserDTO {
 
     private Date lastLoginTime;
 
-    private List<RoleDTO> roles;
+//    private List<RoleVO> roles;
 }
