@@ -6,6 +6,7 @@ import com.windvalley.music.common.base.config.SecurityConfig;
 import com.windvalley.music.entity.Role;
 import com.windvalley.music.service.IRoleService;
 import com.windvalley.music.service.IUserService;
+import com.windvalley.music.vo.RoleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -52,11 +53,11 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                 .getSubject();
 
         if (userName != null){
-            List<Role> roles = roleService.getRolesByUserName(userName);
+            List<RoleVO> roles = roleService.getRolesByUserName(userName);
 
             List<SimpleGrantedAuthority> collect = new ArrayList<SimpleGrantedAuthority>();
-            for (Role role : roles){
-                collect.add(new SimpleGrantedAuthority(role.getName()));
+            for (RoleVO roleVO : roles){
+                collect.add(new SimpleGrantedAuthority(roleVO.getName()));
             }
 
             return new UsernamePasswordAuthenticationToken(userName, null, collect);

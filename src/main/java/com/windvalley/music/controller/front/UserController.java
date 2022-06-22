@@ -8,7 +8,9 @@ import com.windvalley.music.dto.UserCreateRequest;
 import com.windvalley.music.dto.UserDTO;
 import com.windvalley.music.dto.UserUpdateRequest;
 import com.windvalley.music.entity.User;
+import com.windvalley.music.service.IRoleService;
 import com.windvalley.music.service.IUserService;
+import com.windvalley.music.vo.RoleVO;
 import com.windvalley.music.vo.UserQueryVO;
 import com.windvalley.music.vo.UserVO;
 import io.swagger.annotations.Api;
@@ -31,6 +33,9 @@ import java.util.stream.Collectors;
 public class UserController {
     @Autowired
     IUserService userService;
+
+    @Autowired
+    IRoleService roleService;
 
     @Autowired
     UserConvert userConvert;
@@ -99,6 +104,10 @@ public class UserController {
     @PostMapping("/me")
     public R currentUser(){
         UserVO userVO = userConvert.toVO(userService.getCurrentUser());
+
+        List<RoleVO> roleVOs = roleService.getRolesByUserName(userVO.getUserName());
+
+        userVO.setRoles(roleVOs);
 
         return R.ok().data("item", userVO);
     }
